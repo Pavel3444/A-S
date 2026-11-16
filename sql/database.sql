@@ -1,9 +1,9 @@
--- 1. Создание и выбор базы данных
+-- init db, mok data
+
 CREATE DATABASE IF NOT EXISTS university_db;
 USE university_db;
 
--- 2. Создание независимых таблиц
-CREATE TABLE instructors (
+ CREATE TABLE instructors (
                              id INT AUTO_INCREMENT PRIMARY KEY,
                              name VARCHAR(100) NOT NULL
 );
@@ -15,7 +15,6 @@ CREATE TABLE students (
                           birth_date DATE
 );
 
--- 3. Создание таблицы курсов (ссылается на преподавателей)
 CREATE TABLE courses (
                          id INT AUTO_INCREMENT PRIMARY KEY,
                          course_name VARCHAR(100) NOT NULL,
@@ -25,7 +24,6 @@ CREATE TABLE courses (
                          FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE SET NULL
 );
 
--- 4. Создание таблиц связей (зачисление, оценки, проекты)
 CREATE TABLE enrollments (
                              student_id INT,
                              course_id INT,
@@ -51,10 +49,6 @@ CREATE TABLE projects (
                           project_name VARCHAR(100),
                           FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
-
--- =============================================
--- ЗАПОЛНЕНИЕ ТЕСТОВЫМИ ДАННЫМИ
--- =============================================
 
 INSERT INTO instructors (name) VALUES
                                    ('Алексей Смирнов'),
